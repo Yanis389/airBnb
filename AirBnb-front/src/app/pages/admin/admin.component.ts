@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LocationService, Location } from 'src/app/services/location.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { environment } from 'src/environment/environment';
+
 
 @Component({
   selector: 'app-admin',
@@ -22,7 +24,7 @@ export class AdminComponent implements OnInit {
     this.locationForm = this.fb.group({
       name: [''],
       description: [''],
-      photo: [null] 
+      photo: [null]
     });
   }
 
@@ -41,15 +43,15 @@ export class AdminComponent implements OnInit {
     const location: Location = {
       name: formValues.name,
       description: formValues.description,
-      photo: formValues.photo ? formValues.photo : this.defaultImages[0], 
+      photo: formValues.photo ? formValues.photo : this.defaultImages[0],
       likes: 0
     };
-    this.locationService.addLocation(location, formValues.photo).subscribe(() => { 
+    this.locationService.addLocation(location, formValues.photo).subscribe(() => {
       this.getLocations();
       this.locationForm.reset();
     });
   }
-  
+
   selectLocation(location: Location) {
     this.selectedLocation = location;
     this.locationForm.patchValue({
@@ -57,7 +59,6 @@ export class AdminComponent implements OnInit {
       description: location.description
     });
   }
-
 
   updateLocation() {
     if (!this.selectedLocation) return;
@@ -67,7 +68,7 @@ export class AdminComponent implements OnInit {
       ...this.selectedLocation,
       name: formValues.name,
       description: formValues.description,
-      photo: formValues.photo ? formValues.photo : this.selectedLocation.photo 
+      photo: formValues.photo ? formValues.photo : this.selectedLocation.photo
     };
 
     this.locationService.updateLocation(this.selectedLocation.id!, updatedLocation).subscribe(() => {
@@ -89,12 +90,12 @@ export class AdminComponent implements OnInit {
   }
 
   getLocationImage(location: Location): string {
-    if (location.photo instanceof File) {
-      return URL.createObjectURL(location.photo);
+    if (location.photo) {
+      return `${environment.uploadsUrl}/${location.photo}`;
     }
-    return location.photo ? location.photo : this.defaultImages[0];  
+    return this.defaultImages[0];
   }
-    
+
   addLike(location: Location) {
     this.locationService.likeLocation(location.id!).subscribe(updatedLocation => {
       const index = this.locations.findIndex(loc => loc.id === updatedLocation.id);

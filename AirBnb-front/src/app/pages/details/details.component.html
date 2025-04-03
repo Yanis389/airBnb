@@ -18,14 +18,14 @@
 
     <div class="detail-item" *ngIf="location.photo">
       <label for="photo">Photo :</label>
-      <img [src]="location.photo" alt="Photo de la location" class="photo-preview" />
+      <img [src]="getLocationImage(location)" alt="Photo de la location" class="photo-preview" />
     </div>
 
     <div class="detail-item">
       <label for="likes">Likes :</label>
       <p>{{ location.likes }} likes 👌</p>
     </div>
- 
+
     <button (click)="addLike()" [disabled]="isLoading">
       J'aime  🫶
     </button>

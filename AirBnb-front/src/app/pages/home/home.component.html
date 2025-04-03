@@ -27,7 +27,7 @@
     <div *ngFor="let location of filteredLocations" class="location-card">
       <h4>{{ location.name }}</h4>
       <p>{{ location.description }}</p>
-      <img *ngIf="location.photo" [src]="location.photo" alt="Image de la location" class="location-image" />
+      <img *ngIf="location.photo" [src]="getLocationImage(location)" alt="Image de la location" class="location-image" />
       
       <div class="like-section">
         <span>{{ location.likes }} likes 👌 </span>

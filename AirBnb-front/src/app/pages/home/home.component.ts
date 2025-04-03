@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LocationService, Location } from 'src/app/services/location.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { environment } from 'src/environment/environment';
 
 @Component({
   selector: 'app-home',
@@ -25,6 +26,7 @@ export class HomeComponent implements OnInit {
     this.getLocations();
   }
 
+  // Récupérer les locations depuis le service
   getLocations() {
     this.locationService.getLocations().subscribe(data => {
       this.locations = data;
@@ -32,6 +34,15 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  // Fonction pour obtenir l'image de la location avec un chemin correct
+  getLocationImage(location: Location): string {
+    if (location.photo) {
+      return `${environment.uploadsUrl}/${location.photo}`; // Utiliser l'URL complète
+    }
+    return 'assets/placeholder.jpg'; // Image par défaut si la photo est absente
+  }
+
+  // Filtrer les locations en fonction de la recherche
   onSearch() {
     const term = this.locationForm.value.search.trim().toLowerCase();
     const minLikes = this.locationForm.value.minLikes;
@@ -41,6 +52,7 @@ export class HomeComponent implements OnInit {
       location.name.toLowerCase().includes(term)
     );
     
+    // Filtrer par nombre de likes
     if (minLikes !== '') {
       filtered = filtered.filter(location => location.likes >= minLikes);
     }
@@ -48,6 +60,7 @@ export class HomeComponent implements OnInit {
     this.filteredLocations = filtered;
   }
 
+  // Fonction pour ajouter un like à la location
   addLike(location: Location) {
     this.locationService.likeLocation(location.id!).subscribe(updatedLocation => {
       const index = this.locations.findIndex(loc => loc.id === updatedLocation.id);

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LocationService, Location } from 'src/app/services/location.service';
+import { environment } from 'src/environment/environment';
 
 @Component({
   selector: 'app-details',
@@ -8,8 +9,8 @@ import { LocationService, Location } from 'src/app/services/location.service';
   styleUrls: ['./details.component.scss']
 })
 export class DetailsComponent implements OnInit {
-  location: Location | null = null; // Stocker les détails de la location
-  isLoading: boolean = false; // Pour afficher l'état de chargement
+  location: Location | null = null;
+  isLoading: boolean = false; 
 
   constructor(
     private route: ActivatedRoute,
@@ -18,19 +19,18 @@ export class DetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id'); // Récupérer l'ID de la location à partir de l'URL
+    const id = this.route.snapshot.paramMap.get('id'); 
     if (id) {
-      this.getLocationDetails(Number(id)); // Récupérer les détails de la location
+      this.getLocationDetails(Number(id)); 
     }
   }
 
-  // Récupérer les détails d'une location
   getLocationDetails(id: number): void {
-    this.isLoading = true; // Activer l'état de chargement
+    this.isLoading = true; 
     this.locationService.getLocation(id).subscribe(
       (data) => {
-        this.location = data; // Charger les données de la location
-        this.isLoading = false; // Désactiver l'état de chargement
+        this.location = data; 
+        this.isLoading = false; 
       },
       (error) => {
         console.error('Erreur lors de la récupération de la location', error);
@@ -39,18 +39,23 @@ export class DetailsComponent implements OnInit {
     );
   }
 
-  // Fonction pour ajouter un like à la location
   addLike(): void {
     if (!this.location) return;
     
-    // Incrémente le nombre de likes dans la location
     this.locationService.likeLocation(this.location.id!).subscribe(
       (updatedLocation) => {
-        this.location = updatedLocation; // Met à jour la location avec les nouveaux likes
+        this.location = updatedLocation; 
       },
       (error) => {
         console.error('Erreur lors de l\'ajout du like', error);
       }
     );
+  }
+
+  getLocationImage(location: Location): string {
+    if (location.photo) {
+      return `${environment.uploadsUrl}/${location.photo}`; 
+    }
+    return 'assets/placeholder.jpg'; 
   }
 }
