@@ -1,0 +1,33 @@
+<div class="details-container" *ngIf="location">
+  <h2>Détails de la location</h2>
+
+  <div *ngIf="isLoading" class="loading">
+    Chargement...
+  </div>
+
+  <div *ngIf="!isLoading">
+    <div class="detail-item">
+      <label for="name">Nom de la location :</label>
+      <p>{{ location.name }}</p>
+    </div>
+
+    <div class="detail-item">
+      <label for="description">Description :</label>
+      <p>{{ location.description }}</p>
+    </div>
+
+    <div class="detail-item" *ngIf="location.photo">
+      <label for="photo">Photo :</label>
+      <img [src]="location.photo" alt="Photo de la location" class="photo-preview" />
+    </div>
+
+    <div class="detail-item">
+      <label for="likes">Likes :</label>
+      <p>{{ location.likes }} likes 👌</p>
+    </div>
+ 
+    <button (click)="addLike()" [disabled]="isLoading">
+      J'aime  🫶
+    </button>
+  </div>
+</div>

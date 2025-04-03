@@ -1,0 +1,121 @@
+.admin-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9; /* Fond clair pour contraster avec le bleu */
+
+  h2, h3 {
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    label {
+      font-weight: bold;
+      font-size: 1rem;
+      color: #333;
+    }
+
+    input, textarea {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    button {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #007AFF; /* Bleu moderne */
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #005BB5; /* Effet hover */
+      }
+    }
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      border-bottom: 1px solid #ddd;
+      background-color: #fff;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      
+      .location-details {
+        flex: 1;
+        max-width: 80%;
+        padding-right: 10px;
+        
+        h4 {
+          font-size: 1.2rem;
+          font-weight: 600;
+          color: #333;
+        }
+
+        p {
+          margin: 5px 0;
+          color: #555;
+        }
+
+        .location-image {
+          width: 100px;
+          height: 80px;
+          object-fit: cover;
+          border-radius: 5px;
+          margin-top: 10px;
+        }
+      }
+
+      .location-actions {
+        display: flex;
+        gap: 10px;
+
+        button {
+          padding: 8px 16px;
+          border-radius: 5px;
+          background-color: #007AFF;
+          color: white;
+          font-weight: bold;
+          cursor: pointer;
+
+          &:hover {
+            background-color: #005BB5;
+          }
+
+          &.delete-btn {
+            background-color: #ff4d4d; /* Rouge pour le bouton de suppression */
+          }
+
+          &.delete-btn:hover {
+            background-color: #e60000;
+          }
+        }
+      }
+    }
+  }
+}

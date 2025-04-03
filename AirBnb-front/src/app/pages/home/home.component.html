@@ -1,0 +1,40 @@
+<div class="home-container">
+  <!-- Message de bienvenue -->
+  <div class="welcome-message">
+    <h3>Bienvenue sur notre site de réservation de locations !</h3>
+    <p>Explorez nos options et trouvez la location idéale pour votre séjour.</p>
+  </div>
+
+  <h2>Liste des Locations</h2>
+
+  <form [formGroup]="locationForm" (ngSubmit)="onSearch()">
+    <input 
+      type="text" 
+      formControlName="search" 
+      placeholder="Rechercher une location par nom" 
+      (input)="onSearch()" />
+
+    <input 
+      type="number" 
+      formControlName="minLikes" 
+      placeholder="Likes minimum" 
+      (input)="onSearch()" />
+
+    <button type="submit">Rechercher</button>
+  </form>
+
+  <div class="location-list">
+    <div *ngFor="let location of filteredLocations" class="location-card">
+      <h4>{{ location.name }}</h4>
+      <p>{{ location.description }}</p>
+      <img *ngIf="location.photo" [src]="location.photo" alt="Image de la location" class="location-image" />
+      
+      <div class="like-section">
+        <span>{{ location.likes }} likes 👌 </span>
+        <button (click)="addLike(location)">Like 🫶</button>
+      </div>
+      
+      <button routerLink="/details/{{ location.id }}" class="details-btn">Voir Détails</button>
+    </div>
+  </div>
+</div>

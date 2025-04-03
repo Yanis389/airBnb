@@ -1,0 +1,35 @@
+<div class="admin-container">
+  <h2>Gestion des Locations</h2>
+
+  <form [formGroup]="locationForm" (ngSubmit)="selectedLocation ? updateLocation() : addLocation()">
+    <label for="name">Nom :</label>
+    <input type="text" formControlName="name" id="name" required />
+
+    <label for="description">Description :</label>
+    <textarea formControlName="description" id="description" required></textarea>
+
+    <label for="photo">Photo :</label>
+    <input type="file" (change)="onFileChange($event)" id="photo" />
+
+    <button type="submit">
+      {{ selectedLocation ? 'Mettre à jour' : 'Ajouter' }}
+    </button>
+  </form>
+
+  <h3>Liste des Locations</h3>
+  <ul>
+    <li *ngFor="let location of locations">
+      <div class="location-details">
+        <h4>{{ location.name }}</h4>
+        <p>{{ location.description }}</p>
+        <img *ngIf="location.photo" [src]="getLocationImage(location)" alt="Image" class="location-image" />
+        <p>{{ location.likes }} likes 🫶</p>
+      </div>
+
+      <div class="location-actions">
+        <button (click)="selectLocation(location)">Modifier</button>
+        <button (click)="deleteLocation(location.id!)" class="delete-btn">Supprimer</button>
+      </div>
+    </li>
+  </ul>
+</div>

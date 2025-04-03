@@ -1,0 +1,56 @@
+.header {
+    background-color: #007AFF; /* Bleu moderne */
+    color: white;
+    padding: 10px 0;
+
+    /* Utilisation de Flexbox pour aligner le logo et les boutons sur la même ligne */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar-brand {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: white;
+      margin-right: auto; /* Force l'alignement du logo à gauche */
+    }
+
+    .navbar-buttons {
+      display: flex; /* Flexbox pour aligner les boutons horizontalement */
+      gap: 10px; /* Espacement entre les boutons */
+    }
+
+    .nav-link {
+      font-size: 0.9rem;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 4px;
+      transition: background-color 0.3s, border-color 0.3s;
+      border: 2px solid transparent; /* Définir un bord transparent initialement */
+    }
+
+    .nav-link:hover {
+      background-color: #005BB5; /* Changement de couleur au survol */
+      color: white;
+      border-color: white; /* Contour visible au survol */
+    }
+
+    /* Boutons rectangulaires */
+    .btn-rectangle {
+      padding: 8px 20px;
+      border-radius: 4px;
+      background-color: #007AFF; /* Boutons bleus */
+      color: white;
+      text-transform: uppercase;
+      font-weight: 600;
+      border: 2px solid transparent; /* Ajout d'un bord transparent par défaut */
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    .btn-rectangle:hover {
+      background-color: #005BB5; /* Effet survol avec couleur plus foncée */
+      border-color: white; /* Bord visible au survol */
+    }
+}
